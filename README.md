@@ -1,5 +1,5 @@
 # Prova Técnica DBC
-Este arquivo possui como objetivo apresentar ao público uma automação em página Web realizada utilizando o framework RobotFramework e a biblioteca Selenium na linguagem de programação Python. No decorrer do documento serão dados mais detalhes acerca do processo de desenvolvimento.
+Este arquivo possui como objetivo apresentar ao público uma automação em página Web realizada utilizando o framework RobotFramework e a biblioteca Selenium na linguagem de programação Python. No decorrer do documento serão dados mais detalhes acerca do processo de teste.
 
 ## Configurações do sistema
 * Ubuntu 20.04 LTS
