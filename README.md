@@ -29,7 +29,7 @@ OpenJDK Runtime Environment (build 1.8.0_292-8u292-b10-0ubuntu1~20.04-b10)
 OpenJDK 64-Bit Server VM (build 25.292-b10, mixed mode)</pre>
 É possível instalar o JDK (Java Development Kit) 8 através do comando:
 ```bash
-get install openjdk-8-jdk
+sudo apt-get install openjdk-8-jdk
 ```
 Após isso há dois caminhos possíveis, caso exista outra versão do java na sua máquina você precisa apontar para a versão do jdk8 através do comando `sudo update-alternatives --config java` e selecionar a opção possivelmente representada por <pre>/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java</pre>
 Caso não haja outra versão do Java você pode prosseguir com os próximos passos. 
