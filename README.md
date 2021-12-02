@@ -120,7 +120,7 @@ Plugins:
     </plugin>
 
 ## Como subir a API
-Na raiz do projeto, através de seu Prompt de Commando/Terminal/Console execute o comando 
+Dentro do diretório "API", através de seu Prompt de Commando/Terminal/Console execute o comando 
 
 ```bash
 mvn clean spring-boot:run
