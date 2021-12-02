@@ -1,5 +1,5 @@
-# Prova Técnica DBC
-Este arquivo possui como objetivo apresentar ao público duas aplicações. A primeira aplicação é uma automação em página Web realizada utilizando o framework RobotFramework e a biblioteca Selenium na linguagem de programação Python, a segunda aplicação é uma automação de API utilizando as bibliotecas Restassured e Testng. No decorrer do documento serão dados mais detalhes acerca de cada projeto.
+# Automação de teste de API com RestAssured e TestNG
+Este arquivo possui como objetivo apresentar ao público uma automação de teste unitário de API utilizando as bibliotecas Restassured e Testng. No decorrer do documento serão dados mais detalhes acerca do processo de teste.
 
 ## Configurações do sistema
 * Ubuntu 20.04 LTS
