@@ -1,4 +1,4 @@
-# Prova Técnica DBC
+# Automação de teste de API com RestAssured e TestNG
 Este arquivo possui como objetivo apresentar ao público uma automação de teste unitário de API utilizando as bibliotecas Restassured e Testng. No decorrer do documento serão dados mais detalhes acerca do processo de teste.
 
 ## Configurações do sistema
