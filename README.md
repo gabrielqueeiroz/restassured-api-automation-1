@@ -6,9 +6,12 @@ Este arquivo possui como objetivo apresentar ao público uma automação de test
 * Intel® Core™ i5-3337U
 * 8GB RAM
 
-## Desafio 02 (Maven)
+## Desafio Maven
 * Dependências
 * Como instalar
+* Como subir a API
+* Documentação da API
+* Regras verificadas na automação
 * Como executar
 * Interpretando o relatório
 
@@ -115,6 +118,118 @@ Plugins:
             <target>8</target>
         </configuration>
     </plugin>
+
+## Como subir a API
+Na raiz do projeto, através de seu Prompt de Commando/Terminal/Console execute o comando 
+
+```bash
+mvn clean spring-boot:run
+```
+
+A aplicação estará disponível através da URL [http://localhost:8080](http://localhost:8080)
+
+Você pode trocar a porta da aplicação, caso a _8080_ já estiver em uso, adicionando a propriedade JVM `server.port`.
+
+Exemplo:
+
+```bash
+mvn clean spring-boot:run -Dserver.port=8888
+```
+
+## Documentação da API
+A documentação técnica da API está disponível através do OpenAPI/Swagger em [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+## Regras verificadas na automação
+### Restrições
+
+`GET <host>/api/v1/restricoes/{cpf}`
+
+O endpoint de Restrições tem a finalidade de consultar o CPF informando, retornando se ele possui ou não uma restrição. 
+
+* Se não possui restrição do HTTP Status 204 é retornado
+* Se possui restrição o HTTP Status 200 é retornado com a mensagem "O CPF 99999999999 possui restrição"
+
+#### CPFs com restrição
+
+| CPF |
+| ----|
+| 97093236014 |
+| 60094146012 |
+| 84809766080 |
+| 62648716050 |
+| 26276298085 |
+| 01317496094 |
+| 55856777050 |
+| 19626829001 |
+| 24094592008 |
+| 58063164083 |
+
+### Simulações
+
+A simulação é um cadastro que ficará registrado informações importantes sobre o crédito como valor, parcelas, 
+dados de contato, etc...
+
+### Criar uma simulação
+
+`POST <host>/api/v1/simulacoes`
+
+Este endpoint é responsável por inserir uma nova simulação.
+
+Existem os seguintes atributos a serem informados, com suas respectivas regras:
+
+| Atributo | Obrigatório? | Regra |
+|----------|--------------|-------|
+| cpf | sim | texto informando o CPF não no formato 999.999.999-99 |
+| nome | sim | texto informando o nome da pessoa |
+| email | sim | texto informado um e-mail válido |
+| valor | sim | valor da simulação que deve ser igual ou maior que R$ 1.000 e menor ou igual que R$ 40.000 |
+| parcela | sim | número de parcelas para pagamento que deve ser igual ou maior que 2 e menor ou igual a 48 |
+| seguro | sim | booleano `true` se com seguro e  `false` se sem seguro |
+
+* Uma simulação cadastrada com sucesso retorna o HTTP Status 201 e os dados inseridos como retorno
+* Uma simulação com problema em alguma regra retorna o HTTP Status 400 com a lista de erros
+* Uma simulação para um mesmo CPF retorna um HTTP Status 409 com a mensagem "CPF já existente"
+
+### Alterar uma simulação
+
+`PUT <host>/api/v1/simulacoes/{cpf}`
+
+Altera uma simulação já existente, onde o CPF deve ser informado para que a alteração possa ser efetuada.
+
+* A alteração pode ser feita em qualquer atributo da simulação
+* As mesmas regras se mantém
+* Se o CPF não possuir uma simulação o HTTP Status 404 é retornado com a mensagem "CPF não encontrado"
+
+### Consultar todas a simulações cadastradas
+
+`GET <host>/api/v1/simulacoes`
+
+Lista as simulações cadastradas.
+
+* Retorna a lista de simulações cadastradas e existir uma ou mais
+* Retorna HTTP Status 204 se não existir simulações cadastradas
+
+
+### Consultar uma simulação pelo CPF
+
+`GET <host>/api/v1/simulacoes/{cpf}`
+
+Retorna a simulação previamente cadastrada pelo CPF.
+
+* Retorna a simulação cadastrada
+* Se o CPF não possuir uma simulação o HTTP Status 404 é retornado
+
+### Remover uma simulação
+
+`DELETE <host>/api/v1/simulacoes/{id}`
+
+Remove uma simulação previamente cadastrada pelo seu ID.
+
+* Retorna o HTTP Status 204 se simulação for removida com sucesso
+* Retorna o HTTP Status 404 com a mensagem "Simulação não encontrada" se não existir a simulação pelo ID informado
+
+
+
 
 ## Como executar
 Para começar é importante que você já tenha realizado o git pull ou baixado os arquivos deste repositório manualmente. Após isso, o intellij IDEA oferece algumas formas de inicialização, você pode selecionar a opção de abrir um projeto manualmente e navegar até o diretório onde você armazenou o repositório. Com o intellij aberto no diretório correto é interessante verificar a versão do Java que a IDE está utilizando pressionando o atalho `ctrl+alt+shift+s` e selecionando a opção `SDKs`. Caso haja outra SDK que não seja a SDK 1.8, é importante pressionar o ícone "+" e adicionar a SDK 1.8. Provavelmente a própria IDE irá identificar a versão instalada no seu sistema e sugerir na hora de adicionar. Após isso, é possível executar os testes de diversas formas, há o atalho `ctrl+shift+F10` que executa todos os testes registrados no diretório de teste, também é possível navegar pelos diretórios até encontrar a classe correspondente à implementação do teste do endpoint, clicar com o botão direito e executar os testes implementados na classe, e também é possível executar a rotina de testes diretamente dentro da classe, nessa última forma é possível tanto executar todos os casos de teste simultaneamente quanto executar cada caso de teste de forma independente. O relatório de teste fica disponível no console da IDE, onde é possível verificar quais testes foram aprovados, reprovados e bloqueados e a devida justificativa para cada estado.
